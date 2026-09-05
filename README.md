@@ -1,52 +1,57 @@
 # Sentiment Analysis Using Machine Learning
 
-A machine learning-based sentiment analysis system that classifies user reviews into three categories:
+A machine learning-based sentiment analysis system that classifies user
+reviews into three categories:
 
-* **Positive**
-* **Negative**
-* **Neutral**
+-   **Positive**
+-   **Negative**
+-   **Neutral**
 
-The project uses Natural Language Processing (NLP), TF-IDF feature extraction, and multiple machine learning algorithms. A hybrid rule-based layer is also included to handle special cases such as short comments, negation, emojis, and common sentiment expressions.
+The project uses Natural Language Processing (NLP), TF-IDF feature
+extraction, and multiple machine learning algorithms. A hybrid
+rule-based layer is also included to handle special cases such as short
+comments, negation, emojis, and common sentiment expressions.
 
----
+------------------------------------------------------------------------
 
 ## Features
 
-* Text preprocessing using NLP
-* Emoji processing
-* Stopword removal
-* Lemmatization
-* Negation handling
-* Sarcasm pattern handling
-* Contrast handling for words such as `but` and `however`
-* TF-IDF feature extraction
-* Unigram and bigram features
-* Multiple machine learning models
-* 5-fold cross-validation
-* Classification reports
-* Confusion matrices
-* Model accuracy comparison
-* Interactive sentiment prediction
-* Hybrid rule-based + machine learning prediction
-* Handles short comments such as `ok`, `ok ok`, `fine`, and `so so`
-* Handles positive and negative expressions
-* Handles phrases such as `not good` and `not bad`
-* Handles common positive and negative emojis
+-   Text preprocessing using NLP
+-   Emoji processing
+-   Stopword removal
+-   Lemmatization
+-   Negation handling
+-   Sarcasm pattern handling
+-   Contrast handling for words such as `but` and `however`
+-   TF-IDF feature extraction
+-   Unigram and bigram features
+-   Multiple machine learning models
+-   5-fold cross-validation
+-   Classification reports
+-   Confusion matrices
+-   Model accuracy comparison
+-   Interactive sentiment prediction
+-   Hybrid rule-based + machine learning prediction
+-   Handles short comments such as `ok`, `ok ok`, `fine`, and `so so`
+-   Handles positive and negative expressions
+-   Handles phrases such as `not good` and `not bad`
+-   Handles common positive and negative emojis
 
----
+------------------------------------------------------------------------
 
 ## Machine Learning Models
 
 The project compares four classification algorithms:
 
-1. Logistic Regression
-2. Multinomial Naive Bayes
-3. Linear Support Vector Machine (SVM)
-4. Random Forest
+1.  Logistic Regression
+2.  Multinomial Naive Bayes
+3.  Linear Support Vector Machine (SVM)
+4.  Random Forest
 
-The model with the best cross-validation performance is selected as the final machine learning model.
+The model with the best cross-validation performance is selected as the
+final machine learning model.
 
----
+------------------------------------------------------------------------
 
 ## Dataset
 
@@ -54,21 +59,21 @@ The current dataset contains **1,152 reviews**.
 
 ### Sentiment Distribution
 
-| Sentiment | Number of Reviews |
-| --------- | ----------------: |
-| Positive  |               440 |
-| Negative  |               394 |
-| Neutral   |               318 |
-| **Total** |         **1,152** |
+  Sentiment     Number of Reviews
+  ----------- -------------------
+  Positive                    440
+  Negative                    394
+  Neutral                     318
+  **Total**             **1,152**
 
 The dataset is divided into:
 
-* **70% training data**
-* **30% testing data**
+-   **70% training data**
+-   **30% testing data**
 
 The split is stratified to preserve the sentiment distribution.
 
----
+------------------------------------------------------------------------
 
 ## Text Preprocessing
 
@@ -78,23 +83,21 @@ The project performs several preprocessing operations before training.
 
 Example:
 
-```
+``` text
 "This Product Is GREAT"
 ```
 
 becomes:
 
-```
+``` text
 this product is great
 ```
 
 ### 2. Emoji Processing
 
-Common emojis are converted into meaningful words.
+Common emojis are converted into meaningful sentiment words.
 
-Examples:
-
-```
+``` text
 👍 → good
 🔥 → great
 ❤️ → love
@@ -108,7 +111,7 @@ Negation is important in sentiment analysis.
 
 Examples:
 
-```
+``` text
 not good
 not happy
 never works
@@ -116,34 +119,25 @@ never works
 
 The system creates special features such as:
 
-```
+``` text
 not_good
 not_happy
 ```
 
-This helps the model distinguish between:
-
-```
-good
-```
-
-and:
-
-```
-not good
-```
+This helps the model distinguish between `good` and `not good`.
 
 ### 4. Stopword Removal
 
-Common words that provide little sentiment information are removed while preserving important negation words.
+Common words that provide little sentiment information are removed while
+important negation words are preserved.
 
 ### 5. Lemmatization
 
-Words are reduced to their base forms.
+Words are reduced toward their base forms.
 
 Example:
 
-```
+``` text
 working
 worked
 works
@@ -153,9 +147,10 @@ are normalized toward their base form.
 
 ### 6. Contrast Handling
 
-The system gives additional importance to the part of a sentence following contrast words such as:
+The system gives additional importance to the part of a sentence
+following contrast words such as:
 
-```
+``` text
 but
 however
 although
@@ -164,19 +159,19 @@ though
 
 For example:
 
-```
+``` text
 The product looks good but it does not work.
 ```
 
 The negative part receives additional importance.
 
----
+------------------------------------------------------------------------
 
 ## TF-IDF Feature Extraction
 
-The project uses `TfidfVectorizer` with:
+The project uses `TfidfVectorizer` with unigram and bigram features.
 
-```python
+``` python
 ngram_range=(1, 2)
 max_features=5000
 min_df=2
@@ -188,7 +183,7 @@ Both individual words and two-word combinations are considered.
 
 For example:
 
-```
+``` text
 very good
 not good
 works well
@@ -197,41 +192,44 @@ poor quality
 
 can become useful features.
 
----
+------------------------------------------------------------------------
 
 ## Model Performance
 
-The models were evaluated using both test accuracy and 5-fold cross-validation.
+The models were evaluated using both test accuracy and 5-fold
+cross-validation.
 
-| Model               | Test Accuracy | Cross-Validation Accuracy |
-| ------------------- | ------------: | ------------------------: |
-| Logistic Regression |        92.49% |                    92.31% |
-| Naive Bayes         |        91.62% |                    90.82% |
-| **SVM**             |    **92.77%** |                **93.79%** |
-| Random Forest       |        89.02% |                    89.58% |
+  Model                   Test Accuracy   Cross-Validation Accuracy
+  --------------------- --------------- ---------------------------
+  Logistic Regression            92.49%                      92.31%
+  Naive Bayes                    91.62%                      90.82%
+  **SVM**                    **92.77%**                  **93.79%**
+  Random Forest                  89.02%                      89.58%
 
 ### Best Model
 
 The **Linear SVM** achieved the best cross-validation performance:
 
-```
+``` text
 Cross-Validation Accuracy: 93.79%
 Test Accuracy: 92.77%
 ```
 
 Therefore, SVM is selected as the final machine learning model.
 
----
+------------------------------------------------------------------------
 
 ## Hybrid Sentiment Analysis
 
-Instead of relying entirely on machine learning, the project uses a hybrid approach.
+Instead of relying entirely on machine learning, the project uses a
+hybrid approach.
 
-The system first checks for clear rules and special cases. If no rule matches, the review is passed to the trained SVM.
+The system first checks for clear rules and special cases. If no rule
+matches, the review is passed to the trained SVM.
 
 ### Neutral Examples
 
-```
+``` text
 ok
 ok ok
 okay
@@ -248,13 +246,13 @@ works as expected
 
 These are classified as:
 
-```
+``` text
 neutral
 ```
 
 ### Positive Examples
 
-```
+``` text
 I love this product.
 This is excellent.
 It works perfectly.
@@ -267,13 +265,13 @@ Not bad.
 
 These are classified as:
 
-```
+``` text
 positive
 ```
 
 ### Negative Examples
 
-```
+``` text
 I hate this product.
 This is terrible.
 The product does not work.
@@ -285,37 +283,36 @@ Not good.
 
 These are classified as:
 
-```
+``` text
 negative
 ```
 
----
+------------------------------------------------------------------------
 
 ## Handling Negation
 
-The system specifically handles expressions where negation changes sentiment.
+The system specifically handles expressions where negation changes
+sentiment.
 
-Examples:
-
-```
+``` text
 This is good.
 ```
 
 → Positive
 
-```
+``` text
 This is not good.
 ```
 
 → Negative
 
-```
+``` text
 This is bad.
 ```
 
 → Negative
 
-```
+``` text
 This is not bad.
 ```
 
@@ -323,15 +320,16 @@ This is not bad.
 
 The hybrid rules help make these predictions more reliable.
 
----
+------------------------------------------------------------------------
 
 ## Handling Short or Informal Comments
 
-Short comments can be difficult for machine learning models because they contain very little information.
+Short comments can be difficult for machine learning models because they
+contain very little information.
 
 The system includes special handling for expressions such as:
 
-```
+``` text
 ok
 ok ok
 okay
@@ -344,35 +342,56 @@ nothing special
 
 These are treated as neutral when appropriate.
 
----
+------------------------------------------------------------------------
 
----
+## Handling Special Expressions
+
+The system can also recognize strongly positive expressions that may not
+exist in the training vocabulary.
+
+For example:
+
+``` text
+supercalifragilisticexpialidocious
+```
+
+is a playful expression commonly used to describe something
+extraordinarily good or wonderful, so it can be handled as a positive
+expression rather than being classified as neutral simply because it is
+not present in the TF-IDF vocabulary.
+
+------------------------------------------------------------------------
 
 ## Project Structure
 
+``` text
 sentiment-analysis/
-│
-├── data/
-│   └── reviews.csv
-│
+├── reviews.csv
+├── README.md
 ├── main.py
-├── requirements.txt
-├── .gitignore
-└── README.md
+└── requirements.txt
+```
 
----
+The dataset is stored in the project root, so the Python program should
+load it using:
+
+``` python
+df = pd.read_csv("reviews.csv")
+```
+
+------------------------------------------------------------------------
 
 ## Installation
 
 ### 1. Clone the repository
 
-```
+``` bash
 git clone https://github.com/YOUR_USERNAME/sentiment-analysis.git
 ```
 
 Move into the project directory:
 
-```
+``` bash
 cd sentiment-analysis
 ```
 
@@ -380,41 +399,41 @@ cd sentiment-analysis
 
 Windows:
 
-```
+``` bash
 python -m venv venv
 ```
 
 Activate it:
 
-```
+``` bash
 venv\Scripts\activate
 ```
 
 ### 3. Install dependencies
 
-```
+``` bash
 pip install -r requirements.txt
 ```
 
-If you do not have a `requirements.txt` file yet, install the main dependencies:
+If you do not have a `requirements.txt` file yet:
 
-```
+``` bash
 pip install pandas numpy nltk emoji matplotlib seaborn scikit-learn
 ```
 
 ### 4. Run the program
 
-```
+``` bash
 python main.py
 ```
 
----
+------------------------------------------------------------------------
 
 ## Example
 
 After starting the program:
 
-```text
+``` text
 ======================================
        SENTIMENT ANALYSIS SYSTEM
 ======================================
@@ -424,60 +443,60 @@ Enter a review:
 
 Enter:
 
-```text
+``` text
 I absolutely love this product. It works perfectly!
 ```
 
 Output:
 
-```text
+``` text
 Predicted Sentiment: positive
 ```
 
 Another example:
 
-```text
+``` text
 Enter a review: This product stopped working after two days.
 ```
 
 Output:
 
-```text
+``` text
 Predicted Sentiment: negative
 ```
 
 Another example:
 
-```text
+``` text
 Enter a review: ok ok
 ```
 
 Output:
 
-```text
+``` text
 Predicted Sentiment: neutral
 ```
 
----
+------------------------------------------------------------------------
 
 ## Technologies Used
 
-* Python
-* Pandas
-* NumPy
-* NLTK
-* Scikit-learn
-* Matplotlib
-* Seaborn
-* Emoji
+-   Python
+-   Pandas
+-   NumPy
+-   NLTK
+-   Scikit-learn
+-   Matplotlib
+-   Seaborn
+-   Emoji
 
----
+------------------------------------------------------------------------
 
 ## Python Libraries
 
 The main libraries used in the project are:
 
-```text
+``` text
 pandas
 numpy
 nltk
@@ -487,57 +506,63 @@ seaborn
 scikit-learn
 ```
 
----
+------------------------------------------------------------------------
 
 ## Future Improvements
 
 Possible improvements include:
 
-* Increasing the size of the training dataset
-* Adding more diverse neutral reviews
-* Adding more examples of sarcasm
-* Adding spelling-error handling
-* Adding slang detection
-* Improving mixed-sentiment detection
-* Hyperparameter tuning
-* Trying transformer-based models such as BERT
-* Building a web interface
-* Creating an API for sentiment prediction
-* Saving the trained model with `joblib`
-* Adding confidence scores
-* Deploying the application online
+-   Increasing the size of the training dataset
+-   Adding more diverse neutral reviews
+-   Adding more examples of sarcasm
+-   Adding spelling-error handling
+-   Adding slang detection
+-   Improving mixed-sentiment detection
+-   Hyperparameter tuning
+-   Trying transformer-based models such as BERT
+-   Building a web interface
+-   Creating an API for sentiment prediction
+-   Saving the trained model using `joblib`
+-   Adding confidence scores
+-   Deploying the application online
 
----
+------------------------------------------------------------------------
 
 ## Limitations
 
-Although the system achieves strong accuracy, sentiment analysis can be difficult for:
+Although the system achieves strong accuracy, sentiment analysis can be
+difficult for:
 
-* Sarcasm
-* Very short comments
-* Spelling mistakes
-* Ambiguous statements
-* Context-dependent expressions
-* Unusual slang
-* Mixed emotions
-* Words with different meanings in different contexts
+-   Sarcasm
+-   Very short comments
+-   Spelling mistakes
+-   Ambiguous statements
+-   Context-dependent expressions
+-   Unusual slang
+-   Mixed emotions
+-   Words with different meanings in different contexts
 
-The hybrid rules help with several of these cases, but they cannot guarantee perfect predictions.
+The hybrid rules help with several of these cases, but they cannot
+guarantee perfect predictions.
 
----
+------------------------------------------------------------------------
 
 ## Conclusion
 
-This project demonstrates how Natural Language Processing and machine learning can be used to classify reviews into positive, negative, and neutral sentiments.
+This project demonstrates how Natural Language Processing and machine
+learning can be used to classify reviews into positive, negative, and
+neutral sentiments.
 
-Among the evaluated models, **Linear SVM achieved the best performance**, with:
+Among the evaluated models, **Linear SVM achieved the best
+performance**, with:
 
-```text
+``` text
 93.79% 5-Fold Cross-Validation Accuracy
 92.77% Test Accuracy
 ```
 
-The combination of **TF-IDF, NLP preprocessing, SVM, and rule-based sentiment handling** provides an effective approach for building a practical sentiment analysis system.
+The combination of **TF-IDF, NLP preprocessing, SVM, and rule-based
+sentiment handling** provides an effective approach for building a
+practical sentiment analysis system.
 
----
-
+------------------------------------------------------------------------
