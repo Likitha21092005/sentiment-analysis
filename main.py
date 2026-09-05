@@ -40,7 +40,7 @@ nltk.download("wordnet")
 # LOAD DATASET
 # ============================================================
 
-df = pd.read_csv("data/reviews.csv")
+df = pd.read_csv("reviews.csv")
 
 # Remove duplicate rows
 df = df.drop_duplicates()
