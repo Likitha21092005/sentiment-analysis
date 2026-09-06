@@ -547,6 +547,10 @@ guarantee perfect predictions.
 
 ------------------------------------------------------------------------
 
+## Live Demo
+
+[Try the Sentiment Analysis App](https://sentiment-analysisgit-ifuknlvh8cs8pcmqb94nkq.streamlit.app/)
+
 ## Conclusion
 
 This project demonstrates how Natural Language Processing and machine
